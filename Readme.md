@@ -6,7 +6,7 @@ This project is designed to automate the extraction, transformation, and loading
 ## 🧱 Architecture Overview
 The ETL pipeline is built using the following components:
 
-![Architecture Diagram](./Project%20Architecture%20Diagram.png)
+![Architecture Diagram](./architecture.png)
 
 ## 🛰️ Workflow Breakdown
 
