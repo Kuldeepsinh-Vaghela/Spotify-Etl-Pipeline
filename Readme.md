@@ -16,7 +16,7 @@ The ETL pipeline is built using the following components:
   - Authenticates with Spotify using the Spotipy library and credentials stored in environment variables.
   - Extracts top tracks for a given artist (e.g., Ed Sheeran).
   - Writes raw JSON data to:  
-    `s3://spotify-etl-project-kuldeep/raw-data/to-processed/`
+    `s3://<raw bucket path>`
   - Starts the AWS Glue transformation job.
 
 ### 🔧 TRANSFORM
@@ -27,8 +27,8 @@ The ETL pipeline is built using the following components:
     - **Albums:** album_id, album_name, release_date, num_of_tracks, album_url
     - **Tracks:** track_id, track_name, album_name, album_id, track_duration_ms, is_explicit, popularity, track_url
   - Writes output as CSV files to:
-    - `s3://spotify-etl-project-kuldeep/transformed-data/album-data/album_data_transformed_<date>/`
-    - `s3://spotify-etl-project-kuldeep/transformed-data/tracks-data/tracks_data_transformed_<date>/`
+    - `s3://<transformed bucket path>album_data_transformed_<date>/`
+    - `s3://<transformed bucket path>tracks_data_transformed_<date>/`
 
 ### 📥 LOAD (into Snowflake)
 - **Storage Integration:**
@@ -38,7 +38,7 @@ The ETL pipeline is built using the following components:
   - Defined CSV file format with `SKIP_HEADER=1`, and `empty_field_as_null=true`.
 
 - **External Stage:**
-  - Points to: `s3://spotify-etl-project-kuldeep/transformed-data/`
+  - Points to: `s3://<transformed bucket path>`
 
 - **Tables:**
   - `tbl_album` and `tbl_tracks` created in Snowflake to store structured data.
@@ -48,10 +48,6 @@ The ETL pipeline is built using the following components:
   - `tbl_tracks_pipe` watches `tracks-data/`
   - Auto-ingests new files when S3 event notifications are received.
 
-- **Manual Ingestion (For Testing):**
-  ```sql
-  ALTER PIPE spotify_db.data_pipes.tbl_album_pipe REFRESH;
-  ```
 
 ## ✅ Monitoring & Validation
 - View latest pipe status:
@@ -88,13 +84,7 @@ s3://spotify-etl-project-kuldeep/
           |-- tracks_data_transformed_<date>/
 ```
 
-## 🚀 Future Improvements
-- Add schema validation and error handling in the Glue job
-- Extend support to load artist and playlist metadata
-- Build dashboards using Amazon QuickSight or Tableau
-- Schedule daily summary aggregations and reporting
 
----
 
 > **Note:** All AWS resource names and paths have been generalized to avoid exposing sensitive or private identifiers.
 
