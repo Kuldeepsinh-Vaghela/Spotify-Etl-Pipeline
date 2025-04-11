@@ -1,7 +1,7 @@
 # Spotify ETL Pipeline with AWS and Snowflake
 
 ## 📌 Project Overview
-This project is designed to automate the extraction, transformation, and loading (ETL) of music data from the Spotify API into a Snowflake data warehouse using AWS services. The goal is to enable scalable, automated analytics on Spotify track and album data.
+This project is designed to automate the extraction, transformation, and loading (ETL) of music data from the Spotify API into a Snowflake data warehouse using AWS services. The goal is to enable scalable, automated analytics on Spotify track and album data. For a detailed walkthrough of the project, check out my [Medium article](https://medium.com/@KuldeepsinhVaghela/building-a-real-time-spotify-etl-pipeline-with-aws-and-snowflake-d7b360157097).
 
 ## 🧱 Architecture Overview
 The ETL pipeline is built using the following components:
